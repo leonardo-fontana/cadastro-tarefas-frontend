@@ -1,13 +1,7 @@
-# Projeto para Gerenciar Cursos
+# Projeto Iluminar
 
 ### Descrição
+Projeto de lista de tarefas
 
 
-asdasdasdas
-### Estrutura dos dados
-
-    #### Cursos
-        - nome
-        - decricao
-        - status 
 
