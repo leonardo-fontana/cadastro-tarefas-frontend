@@ -1,0 +1,16 @@
+FRONT - REACT 
+    * Tudo que será visualizado no navegador
+
+    / -> index 
+    / sobre -> falar sobre o conteudo do site
+    /cursos/
+    /contato
+
+
+BACKEND (API) - NODEJS + EXPRESS + MYSQL
+    * Para ser consumido pelo FRONT/mobile através de REST/JSON
+
+    /v1/curso
+    /v1/curso/1
+    /v1/estudantes
+    /v1/usuario
