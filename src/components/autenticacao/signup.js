@@ -1,76 +1,65 @@
-import { useState } from "react"
-import { createServiceTarefa } from "../../services/tarefa.service"
-import { Button, Row, Col, FormGroup, Label, Input } from 'reactstrap';
-import styled from "styled-components";
-import ReactSwal from "../../plugins/swal";
+import React, { useState } from 'react';
+import {
+    Form, FormGroup, Input,
+    Card, Col, CardBody,
+    CardHeader,
+    Button, CardFooter, Label, Alert, Spinner
+} from 'reactstrap';
+import { Sign } from '../../assets/styled';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const Inscricao = ({ id, update, isForm }) => {
-    const [form, setForm] = useState({})
+const SignIn = () => {
 
-    const handleChange = (e) => {
+    const [form, setForm] = useState({
+        usuario: "fulandetal@detal.com",
+        senha: "123123"
+    })
+    const nothing = ""
+    /*const submitForm = (event) => {
+        event.preventDefault()
+        dispatch(signInAction(form))
+    }*/
+
+
+    const handleChange = (props) => {
+        const { value, name } = props.target;
         setForm({
             ...form,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const submitForm = () => {
-        const nform = {
-            ...form,
-            name: form.name.toUpperCase(),
-            email: form.email.toLowerCase()
-        }
-
-        createServiceTarefa(id, nform)
-            .then(() => {
-                ReactSwal.fire({
-                    icon: 'success',
-                    title: `Cadastro do Aluno ${form.name} feito com sucesso !`,
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                })
-                setForm({});
-                update(true)
-                isForm(false)
-            })
-            .catch(erro => console.log('deu ruim...'))
-    }
+            [name]: value,
+        });
+    };
 
     return (
-        <BoxInscricao>
-            <Col xs="12" sm="12" md="8" lg="8">
-                <FormGroup>
-                    <Label for="name">Nome</Label>
-                    <Input type="text" id="name" value={form.name || ""} onChange={handleChange}
-                        name="name" placeholder="Insira seu nome" className="text-uppercase" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="email">Email</Label>
-                    <Input type="email" id="email" value={form.email || ""} onChange={handleChange}
-                        name="email" placeholder="Insira seu email" className="text-lowercase" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="nascimento">Data Nascimento</Label>
-                    <Input type="date" id="nascimento" value={form.data_nascimento || ""} onChange={handleChange}
-                        name="data_nascimento" placeholder="Insira seu nascimento" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="nascimento">Senha</Label>
-                    <Input type="text" id="senha" value={form.data_nascimento || ""} onChange={handleChange}
-                        name="data_nascimento" placeholder="Insira sua senha" />
-                </FormGroup>
-                <FormGroup>
-                    <Button color="primary" onClick={submitForm}>Cadastrar</Button>
-                </FormGroup>
+        <Sign>
+            <Col sm={12} md={4} lg={5}>
+                <Card>
+                    <CardHeader tag="h4" className="text-center">Login</CardHeader>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label for="email">E-mail:</Label>
+                                <Input type="email" name="usuario" id="usuario" onChange={handleChange} value={form.usuario || ""} placeholder="Informe seu E-mail" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="password">Senha:</Label>
+                                <Input type="password" name="senha" id="senha" onChange={handleChange} value={form.senha || ""} placeholder="Informe sua senha" />
+                            </FormGroup>
+                            <Button color='primary' size="sm" block onClick={nothing/*submitform*/}>
+                                Enviar
+                            </Button>
+                        </Form >
+                    </CardBody>
+                    <CardFooter className="text-muted">
+                        Não tem Cadastro? <Link to="/signup">Cadastre-se</Link>
+                    </CardFooter>
+
+                </Card>
             </Col>
-        </BoxInscricao>
+        </Sign>
     )
 }
 
-export default Inscricao
-
-
-const BoxInscricao = styled(Row)`
-`
-
+export default SignIn;
 

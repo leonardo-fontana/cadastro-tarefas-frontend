@@ -37,11 +37,12 @@ const Header = (props) => {
                                 <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/tarefa" >Tarefas</SNavLink>
                             </NavItem>
                             <NavItem >
-                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Cadastrar-se</SNavLink>
-                            </NavItem>
-                            <NavItem >
                                 <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/sobre" >Sobre</SNavLink>
                             </NavItem>
+                            <NavItem >
+                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Cadastrar-se</SNavLink>
+                            </NavItem>
+                            
                         </Nav>
                     </SCollapse>
                 </Container>

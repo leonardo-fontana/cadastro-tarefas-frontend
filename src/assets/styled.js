@@ -9,6 +9,15 @@ const InputField = styled.input`
     box-shadow: 1px 1px 1px  #666;
 `
 
+const Sign = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-width:100%;
+    min-height:100%;
+`
+
 export {
+    Sign,
     InputField
 }

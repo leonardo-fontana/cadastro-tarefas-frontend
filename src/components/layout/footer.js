@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Footer = () => (
     <SFooter>
-        <p>todos os direitos reservados </p>
+        <p>Todos os direitos reservados - Leonardo Damásio Fontana </p>
     </SFooter>
 );
 
