@@ -11,7 +11,8 @@ import Layout from './components/layout'
 
 // views
 import Home from './views/home';
-import Tarefas from './views/tarefas';
+import Tarefas from './views/tarefa';
+import CadastroTarefa from './views/tarefa/create';
 import Sobre from './views/sobre';
 import SignIn from './views/cadastro';
 import Detalhes from './views/detalhes';
@@ -26,6 +27,7 @@ const Routers = () => {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route exact path='/tarefa' component={Tarefas} />
+                    <Route exact path='/tarefa/:id' component={CadastroTarefa} />
                     <Route exact path='/signin' component={SignIn} />
                     <Route exact path='/sobre' component={Sobre} />
                     <Route exact path='/detalhes/:id' component={Detalhes} />

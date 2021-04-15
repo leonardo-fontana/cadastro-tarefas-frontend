@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 
 const Home = () => {

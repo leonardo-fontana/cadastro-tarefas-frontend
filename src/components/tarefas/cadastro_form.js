@@ -22,7 +22,6 @@ const CadastroForm = () => {
         <Label for="examplePassword">Data de término</Label>
         <Input type="date" name="data_inicio" id="data_inicio" />
       </FormGroup>
-      <Button>Submit</Button>
     </Form>
     )
 }

@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { getServiceAllTarefas } from '../services/tarefa.service.js';
-import CardItem from "../components/tarefas/card_item";
-import Loading from '../components/loading'
+import { getServiceAllTarefas, createServiceTarefa } from '../../services/tarefa.service.js';
+import CardItem from "../../components/tarefas/card_item";
+import Loading from '../../components/loading'
 import styled from 'styled-components';
-import { Col, Row, Button, Navbar } from 'reactstrap';
-import FormCadastro from "../components/tarefas/cadastro_form"
+import { Col, Row, Button, Navbar,Form } from 'reactstrap';
+import FormCadastro from "../../components/tarefas/cadastro_form"
 
 const Tarefas = () => {
 
     const [tarefas, setTarefas] = useState([]);
     const [loading, setLoading] = useState(false)
     const [hasError, setError] = useState(false)
+    const [form, setForm] = useState({})
 
     const [detalhe, setDetalhe] = useState({});
     const [update, setUpdate] = useState(false)
@@ -30,6 +31,31 @@ const Tarefas = () => {
             })
     }, [])
 
+    /*const submitForm = () => {
+        const nform = {
+            ...form,
+            titulo_tarefa: form.titulo_tarefa.toUpperCase(),
+            descricao_tarefa: form.descricao_tarefa,
+            data_inicio: form.data_inicio.toLowerCase(),
+            data_fim: form.data_fim.toLowerCase()
+        }
+
+        createServiceTarefa(id, nform)
+            .then(() => {
+                ReactSwal.fire({
+                    icon: 'success',
+                    title: `Cadastro do Aluno ${form.name} feito com sucesso !`,
+                    showConfirmButton: false,
+                    showCloseButton: true,
+                })
+                setForm({});
+                update(true)
+                isForm(false)
+            })
+            .catch(erro => console.log('deu ruim...'))
+    }*/
+
+
     useEffect(() => {
         getTarefas();
     }, [getTarefas])
@@ -38,9 +64,7 @@ const Tarefas = () => {
         <Navbar expand="md mb-4">
             <div className="info d-none d-md-block d-lg-block">
             </div>
-            <Button onClick={() => setToggle(!toggleBotton)} color={!toggleBotton ? "primary" : "secondary"} size="sm">        
-                Adicionar nova tarefa
-            </Button>
+            <a href="/tarefa/1" class="btn btn-primary">Cadastrar nova tarefa</a>
         </Navbar>
     )
 
@@ -51,15 +75,17 @@ const Tarefas = () => {
     ))
 
     return (
-        <div>           
+        <div>    
+            {Menu()}       
             <BoxTarefas>        
                 {loading ? <Loading /> : MapearTarefas(tarefas)}
             </BoxTarefas>
-            {Menu()}
             {
-                // [condicao] ? [true] : [false]
                 toggleBotton
-                    ? (<FormCadastro />)
+                    ? (<FormCadastro />)                    
+                
+                        
+                    
                     : (<div />)
             }
         </div>

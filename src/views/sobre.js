@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Media } from 'reactstrap';
 import Logo from '../assets/images/logo.png';
 
