@@ -15,7 +15,7 @@ import Tarefas from './views/tarefa';
 import CadastroTarefa from './views/tarefa/create';
 import Sobre from './views/sobre';
 import SignIn from './views/cadastro';
-import Detalhes from './views/detalhes';
+import Detalhes from './views/tarefa/detalhes';
 import Error404 from './views/errors/404';
 
 

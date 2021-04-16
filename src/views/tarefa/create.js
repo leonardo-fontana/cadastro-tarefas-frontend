@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { createServiceTarefa } from '../../services/tarefa.service.js';
 import ReactSwal from "../../plugins/swal";
 import { Button,Form,FormGroup,Label,Input } from 'reactstrap';
-import { Redirect } from 'react-router';
 
-const CadastroTarefa = (id, update, isForm) => {
+const CadastroTarefa = (props, id, update, isForm) => {
 
     const [form, setForm] = useState({})
 
@@ -37,12 +36,11 @@ const CadastroTarefa = (id, update, isForm) => {
                 setForm({});
                 update(true)
                 isForm(false)
-                return <Redirect to="/tarefa" />
-
             })
             .catch(erro => console.log('deu ruim...'))
+            
     }
-
+  
     return (
         <div>          
             <Form>
@@ -71,6 +69,7 @@ const CadastroTarefa = (id, update, isForm) => {
             
         </div>
     )
+    
 }
 
 export default CadastroTarefa;

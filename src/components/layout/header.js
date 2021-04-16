@@ -55,7 +55,7 @@ export default Header
 
 
 const SNavbar = styled(Navbar)`
-    background-color: black !important;
+    background-color: gray !important;
     border-bottom: 5px solid #4b8EC7;
 
     a {
@@ -84,6 +84,6 @@ const SCollapse = styled(Collapse)`
 `
 
 const IconLogo = styled(AiFillRead)`
-    font-size: 26px;
-    margin-top: -4px
+    font-size: 24px;
+
 `

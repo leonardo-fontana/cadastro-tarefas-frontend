@@ -13,7 +13,7 @@ const CardItem = (props) => {
         <SCard>
             <CardBody>
                 <CardTitle tag="h5">{titulo}</CardTitle>
-                <Button size="sm"  tag={Link} to={`/detalhes/${id}`} color="link">Saiba mais...</Button>
+                <Button size="sm"  tag={Link} to={`/detalhes/${id}`} color="link">Detalhar...</Button>
             </CardBody>
         </SCard>
     )

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { getServiceAllTarefas, createServiceTarefa } from '../../services/tarefa.service.js';
+import { getServiceAllTarefas } from '../../services/tarefa.service.js';
 import CardItem from "../../components/tarefas/card_item";
 import Loading from '../../components/loading'
 import styled from 'styled-components';
-import { Col, Row, Button, Navbar,Form } from 'reactstrap';
+import { Col, Row, Navbar } from 'reactstrap';
 import FormCadastro from "../../components/tarefas/cadastro_form"
 
 const Tarefas = () => {
@@ -11,10 +11,10 @@ const Tarefas = () => {
     const [tarefas, setTarefas] = useState([]);
     const [loading, setLoading] = useState(false)
     const [hasError, setError] = useState(false)
-    const [form, setForm] = useState({})
+    //const [form, setForm] = useState({})
 
-    const [detalhe, setDetalhe] = useState({});
-    const [update, setUpdate] = useState(false)
+    //const [detalhe, setDetalhe] = useState({});
+   // const [update, setUpdate] = useState(false)
     const [toggleBotton, setToggle] = useState(false)
     
     const getTarefas = useCallback(() => {
@@ -82,9 +82,7 @@ const Tarefas = () => {
             </BoxTarefas>
             {
                 toggleBotton
-                    ? (<FormCadastro />)                    
-                
-                        
+                    ? (<FormCadastro />)                                        
                     
                     : (<div />)
             }
