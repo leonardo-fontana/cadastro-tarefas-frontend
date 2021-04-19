@@ -46,7 +46,7 @@ const CadastroTarefa = (props, id, update, isForm) => {
             <Form>
                 <FormGroup>
                     <Label for="titulo">Título</Label>
-                    <Input type="text" name="titulo_tarefa" id="titulo_tarefa" placeholder="Titulo da tarefar" onChange={handleChange} />
+                    <Input type="text" name="titulo_tarefa" id="titulo_tarefa" placeholder="Titulo da tarefa" onChange={handleChange} />
                 </FormGroup>
                 <FormGroup>
                     <Label for="descricao_tarefa">Descrição</Label>
