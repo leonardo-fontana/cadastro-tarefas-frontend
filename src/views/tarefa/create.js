@@ -32,10 +32,12 @@ const CadastroTarefa = (props, id, update, isForm) => {
                     title: `Cadastro da tarefa ${form.titulo_tarefa} realizada com sucesso !`,
                     showConfirmButton: false,
                     showCloseButton: true,
+                    timer: 2000
                 })
                 setForm({});
                 update(true)
                 isForm(false)
+                window.location.href = "googoe.com";
             })
             .catch(erro => console.log('deu ruim...'))
             

@@ -42,7 +42,7 @@ const Detalhes = (props) => {
         })
     }
 
-    const deleteTarefa = useCallback(async () => {
+    const deleteTarefa = () => {
         if (modal.data.id) {
             deleteServiceTarefa(modal.data.id)
                 .then(() => {
@@ -53,11 +53,10 @@ const Detalhes = (props) => {
                         showCloseButton: true,
                     })
                     update(true)
-                    history.push('/tarefa')
                 })
                 .catch(erro => console.log('Algo deu errado...'))
         } 
-    },[id, history]);
+    }
 
     useEffect(() => {
         getDetalhes()
