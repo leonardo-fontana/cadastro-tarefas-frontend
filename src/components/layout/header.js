@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { NavLink as RRDNavLink } from 'react-router-dom'; // funcionalidade
 import {
     Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,    
+    Nav, Navbar, NavItem, NavLink, NavbarToggler, NavbarBrand,
     Container,
     Tooltip
 } from 'reactstrap';
@@ -41,8 +36,7 @@ const Header = (props) => {
                             </NavItem>
                             <NavItem >
                                 <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Cadastrar-se</SNavLink>
-                            </NavItem>
-                            
+                            </NavItem>                       
                         </Nav>
                     </SCollapse>
                 </Container>
@@ -52,7 +46,6 @@ const Header = (props) => {
 }
 
 export default Header
-
 
 const SNavbar = styled(Navbar)`
     background-color: gray !important;

@@ -4,18 +4,12 @@ import CardItem from "../../components/tarefas/card_item";
 import Loading from '../../components/loading'
 import styled from 'styled-components';
 import { Col, Row, Navbar } from 'reactstrap';
-import FormCadastro from "../../components/tarefas/cadastro_form"
 
 const Tarefas = () => {
 
     const [tarefas, setTarefas] = useState([]);
     const [loading, setLoading] = useState(false)
-    const [hasError, setError] = useState(false)
-    //const [form, setForm] = useState({})
-
-    //const [detalhe, setDetalhe] = useState({});
-   // const [update, setUpdate] = useState(false)
-    const [toggleBotton, setToggle] = useState(false)
+    //const [hasError, setError] = useState(false)
     
     const getTarefas = useCallback(() => {
         setLoading(true)
@@ -25,36 +19,12 @@ const Tarefas = () => {
                 setLoading(false)
             })
             .catch(err => {
-                setError(true)
+                //hasError(true)
+                //setError(true)
                 console.log('Algo deu errado', err)
                 setLoading(false)
             })
     }, [])
-
-    /*const submitForm = () => {
-        const nform = {
-            ...form,
-            titulo_tarefa: form.titulo_tarefa.toUpperCase(),
-            descricao_tarefa: form.descricao_tarefa,
-            data_inicio: form.data_inicio.toLowerCase(),
-            data_fim: form.data_fim.toLowerCase()
-        }
-
-        createServiceTarefa(id, nform)
-            .then(() => {
-                ReactSwal.fire({
-                    icon: 'success',
-                    title: `Cadastro do Aluno ${form.name} feito com sucesso !`,
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                })
-                setForm({});
-                update(true)
-                isForm(false)
-            })
-            .catch(erro => console.log('deu ruim...'))
-    }*/
-
 
     useEffect(() => {
         getTarefas();
@@ -80,12 +50,6 @@ const Tarefas = () => {
             <BoxTarefas>        
                 {loading ? <Loading /> : MapearTarefas(tarefas)}
             </BoxTarefas>
-            {
-                toggleBotton
-                    ? (<FormCadastro />)                                        
-                    
-                    : (<div />)
-            }
         </div>
     )
 }

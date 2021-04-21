@@ -6,23 +6,21 @@ import {
     Redirect
 } from "react-router-dom";
 
-// layout
 import Layout from './components/layout'
 
-// views
 import Home from './views/home';
 import Tarefas from './views/tarefa';
 import CadastroTarefa from './views/tarefa/create';
 import Sobre from './views/sobre';
-import SignIn from './views/cadastro';
+import SignIn from './views/login/signin';
 import Detalhes from './views/tarefa/detalhes';
 import Error404 from './views/errors/404';
-
+import history from './config/history';
 
 const Routers = () => {
 
     return (
-        <Router>
+        <Router history={history}>
             <Layout nomeDaPagina="Iluminar">
                 <Switch>
                     <Route exact path='/' component={Home} />

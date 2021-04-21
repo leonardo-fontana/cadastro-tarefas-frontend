@@ -1,51 +1,52 @@
-import { useState } from "react"
-import { createServiceTarefa } from "../../services/tarefa.service"
+import React, { useState } from 'react';
 import {
     Form, FormGroup, Input,
     Card, Col, CardBody,
     CardHeader,
     Button, CardFooter, Label, Alert, Spinner
 } from 'reactstrap';
-
-import styled from "styled-components";
-import ReactSwal from "../../plugins/swal";
 import { Sign } from '../../assets/styled';
+import { Link } from 'react-router-dom';
+//import { signInAction } from '../../store/auth/auth.action'
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const Inscricao = ({ id, update, isForm }) => {
-    const [form, setForm] = useState({})
+const SignIn = () => {
 
-    const handleChange = (e) => {
+    const [hasError, setHasError] = useState(false);
+
+
+    //const dispatch = useDispatch();
+    const error = useSelector(state => state.auth.error)
+    const loading = useSelector(state => state.auth.loading)
+
+    const [form, setForm] = useState({
+        usuario: "liniquer.silva@prof.infnet.edu.br",
+        senha: "121212"
+    })
+    const handleChange = (props) => {
+        const { value, name } = props.target;
         setForm({
             ...form,
-            [e.target.name]: e.target.value
-        })
+            [name]: value,
+        });
+    };
+
+    const closeError = () => setHasError(false);
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        //dispatch(signInAction(form))
     }
 
-    const submitForm = () => {
-        const nform = {
-            ...form,
-            name: form.name.toUpperCase(),
-            email: form.email.toLowerCase()
-        }
-
-        createServiceTarefa(id, nform)
-            .then(() => {
-                ReactSwal.fire({
-                    icon: 'success',
-                    title: `Cadastro do Aluno ${form.name} feito com sucesso !`,
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                })
-                setForm({});
-                update(true)
-                isForm(false)
-            })
-            .catch(erro => console.log('deu ruim...'))
-    }
+    const isNotValid = () => form.usuario.length === 0 || form.senha.length === 0
+    
+    useEffect(() => {
+        setHasError(error.length > 0)
+    }, [error])
 
     return (
-        <BoxInscricao>
-            <Sign>
+        <Sign>
             <Col sm={12} md={4} lg={5}>
                 <Alert color="danger" isOpen={hasError} toggle={closeError}>
                     <div><strong>OPS !!! </strong> Aconteceu um erro.</div>
@@ -77,13 +78,7 @@ const Inscricao = ({ id, update, isForm }) => {
                 </Card>
             </Col>
         </Sign>
-
-        </BoxInscricao>
     )
 }
 
-export default Inscricao
-
-
-const BoxInscricao = styled(Row)`
-`
+export default SignIn;

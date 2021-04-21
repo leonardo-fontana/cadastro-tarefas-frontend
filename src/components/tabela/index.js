@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import ReactSwal from '../../plugins/swal';
 
 const Tabela = ({ inscritos, update }) => {
-    const { id: id_curso } = useParams(); //  rename id para id_curso
+    const { id: id_curso } = useParams();
 
     const [modal, setModal] = useState({
         isOpen: false,

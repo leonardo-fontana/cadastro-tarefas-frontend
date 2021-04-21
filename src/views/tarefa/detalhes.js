@@ -4,13 +4,12 @@ import { deleteServiceTarefa, getServiceDetalhe } from '../../services/tarefa.se
 import { Button, Jumbotron, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Loading from '../../components/loading'
 import { BiTrash } from 'react-icons/bi'
-import styled from "styled-components";
 import ReactSwal from '../../plugins/swal';
-import history from '../../config/history';
+import { useHistory } from 'react-router';
 
 const Detalhes = (props) => {
-    const { id: id } = useParams();
-
+    const { id } = useParams();
+    const history = useHistory();
     const [loading, setLoading] = useState(false);
     const [detalhe, setDetalhe] = useState({});
     const [update, setUpdate] = useState(false)
@@ -29,8 +28,7 @@ const Detalhes = (props) => {
 
         } catch (error) {
             console.log('####', error)
-            // hasError(true)
-            history.push('/?error=404')
+            history.push('/error/404')
         }
 
     }, [id, history]);
@@ -42,7 +40,7 @@ const Detalhes = (props) => {
         })
     }
 
-    const deleteTarefa = () => {
+    const deleteTarefa = () =>  {
         if (modal.data.id) {
             deleteServiceTarefa(modal.data.id)
                 .then(() => {
@@ -50,12 +48,15 @@ const Detalhes = (props) => {
                         icon: 'success',
                         title: `Tarefa ${modal?.data?.titulo?.split(" ")[0]} deletado com sucesso !`,
                         showConfirmButton: false,
-                        showCloseButton: true,
+                        timer: 2000
                     })
+                    setTimeout(() => {
+                        history.push('/tarefa')
+                    }, 2000) 
                     update(true)
                 })
                 .catch(erro => console.log('Algo deu errado...'))
-        } 
+        }      
     }
 
     useEffect(() => {
@@ -100,25 +101,6 @@ const Detalhes = (props) => {
         loading
             ? <Loading />
             : montarTela(detalhe)
-
-            
-
-
-        //    
-        // <div>
-        //     <div>Aqui está o Detalhamento do Curso</h1>
-        //     { loading ? <Loading /> : imprimirDetalhes(detalhe)}
-        //     <hr />
-        //     <Inscricao
-        //         id={id}
-        //         update={setUpdate}
-        //     />
-        //     <hr />
-        //     <TabelaInscritos
-        //         inscritos={detalhe.subscriptions}
-        //         update={setUpdate}
-        //     />
-        // </div>
     )
 }
 
@@ -126,7 +108,7 @@ const Detalhes = (props) => {
 export default Detalhes;
 
 
-const Navbar = styled.div`
+/*const Navbar = styled.div`
     background-color:none !important;
     margin: 10px 0 20px;
     padding: 10px 0;
@@ -138,9 +120,4 @@ const Navbar = styled.div`
     }
 
 
-`
-
-// tela de detalhes
-
-// Menu de toogle de troca de tela (Botão)
-// tela de inscrição / tabela
+`*/

@@ -3,12 +3,12 @@ import {
     Form, FormGroup, Input,
     Card, Col, CardBody,
     CardHeader,
-    Button, CardFooter, Label, Alert, Spinner
+    Button, CardFooter, Label
 } from 'reactstrap';
 import { Sign } from '../../assets/styled';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+//import { useDispatch, useSelector } from 'react-redux';
+//import { useEffect } from 'react';
 
 const SignIn = () => {
 
@@ -51,10 +51,6 @@ const SignIn = () => {
                             </Button>
                         </Form >
                     </CardBody>
-                    <CardFooter className="text-muted">
-                        Não tem Cadastro? <Link to="/signup">Cadastre-se</Link>
-                    </CardFooter>
-
                 </Card>
             </Col>
         </Sign>

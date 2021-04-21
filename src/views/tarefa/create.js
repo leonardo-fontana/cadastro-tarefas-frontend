@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { createServiceTarefa } from '../../services/tarefa.service.js';
 import ReactSwal from "../../plugins/swal";
 import { Button,Form,FormGroup,Label,Input } from 'reactstrap';
+import { useHistory } from 'react-router';
 
 const CadastroTarefa = (props, id, update, isForm) => {
 
     const [form, setForm] = useState({})
+    const history = useHistory();
 
     const handleChange = (e) => {
         setForm({
@@ -29,18 +31,21 @@ const CadastroTarefa = (props, id, update, isForm) => {
             .then(() => {
                 ReactSwal.fire({
                     icon: 'success',
-                    title: `Cadastro da tarefa ${form.titulo_tarefa} realizada com sucesso !`,
+                    title: `Tarefa ${form.titulo_tarefa} cadastrado com sucesso !`,
                     showConfirmButton: false,
-                    showCloseButton: true,
                     timer: 2000
                 })
+                 
+                setTimeout(() => {
+                    history.push('/tarefa')
+                }, 2000)   
+                
                 setForm({});
                 update(true)
                 isForm(false)
-                window.location.href = "googoe.com";
+                
             })
-            .catch(erro => console.log('deu ruim...'))
-            
+            .catch(erro => console.log('deu ruim...'))          
     }
   
     return (
@@ -65,13 +70,11 @@ const CadastroTarefa = (props, id, update, isForm) => {
                 <FormGroup>
                     <Label for="usuario_id">Id usuario</Label>
                     <Input type="number" name="usuario_id" id="usuario_id" onChange={handleChange}/>
-                </FormGroup>
-                <Button onClick={submitForm}>Cadastrar</Button>
+                </FormGroup>             
             </Form>
-            
+            <Button onClick={submitForm}>Cadastrar</Button>       
         </div>
-    )
-    
+    ) 
 }
 
 export default CadastroTarefa;

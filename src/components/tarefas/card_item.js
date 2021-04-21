@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
-import {
-    Button,
-    Card, CardBody,
-    CardTitle, CardSubtitle
-} from 'reactstrap';
+import { Button,Card, CardBody,CardTitle } from 'reactstrap';
 import styled from 'styled-components';
 
 const CardItem = (props) => {
@@ -20,7 +16,6 @@ const CardItem = (props) => {
 }
 
 export default CardItem;
-
 
 const SCard =  styled(Card)`
 
