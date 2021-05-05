@@ -4,41 +4,89 @@ import {
     Collapse,
     Nav, Navbar, NavItem, NavLink, NavbarToggler, NavbarBrand,
     Container,
-    Tooltip
+    Tooltip,
+    UncontrolledDropdown, DropdownItem, DropdownToggle, DropdownMenu
 } from 'reactstrap';
 import styled from 'styled-components';
 import { AiFillRead } from 'react-icons/ai'
+import { logoutAction } from '../../store/auth/auth.action';
+import { isAuthenticated } from '../../config/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import history from '../../config/history';
 
 const Header = (props) => {
+    const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
 
     const toggleTooltip = () => setTooltipOpen(!tooltipOpen);
 
     const toggle = () => setIsOpen(!isOpen);
+    const usuario = useSelector(state => state.auth.usuario)
+    const isAdmin = useSelector(state => state.auth.isAdmin)
+
+    const logout = () => {
+        dispatch(logoutAction())
+    }
+
 
     return (
         <header>
-            <SNavbar color="dark" dark expand="md">
+            <SNavbar color="dark" dark expand="md" >
                 <Container>
                     <NavbarBrand tag={RRDNavLink} to="/" id="logoMain"> <IconLogo /> Iluminar</NavbarBrand>
                     <Tooltip placement="top" isOpen={tooltipOpen} autohide={false} target="logoMain" toggle={toggleTooltip}>
                         Voltar ao Menu Principal
                     </Tooltip>
-                    <NavbarToggler onClick={toggle} />
-                    <SCollapse isOpen={isOpen} navbar>
+                    <SCollapse isOpen={isOpen} navbar >
                         <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/tarefa" >Tarefas</SNavLink>
-                            </NavItem>
+                            <NavItem >
+                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/" >Inicio</SNavLink>
+                            </NavItem>   
                             <NavItem >
                                 <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/sobre" >Sobre</SNavLink>
-                            </NavItem>
-                            <NavItem >
-                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Cadastrar-se</SNavLink>
-                            </NavItem>                       
+                            </NavItem>                                             
                         </Nav>
                     </SCollapse>
+                    {isAuthenticated() ? (
+                        <React.Fragment>
+                            <SCollapse isOpen={isOpen} navbar>
+                                <Nav className="mr-auto" navbar>
+
+                                    {isAdmin ? (
+                                        <>
+                                            <NavItem>
+                                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/tarefa" >Tarefa</SNavLink>
+                                            </NavItem>
+                                            <NavItem>
+                                                <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/usuarios" >Usuarios</SNavLink>
+                                            </NavItem>
+                                        </>
+                                    ) : ""}
+                                
+                                </Nav>
+                            </SCollapse>
+
+                            <Nav >
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        {usuario.nome}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+
+                                        <DropdownItem onClick={() => history.push('/perfil')}>Perfil</DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem onClick={logout}>Sair</DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </Nav>
+                        </React.Fragment>
+                    ) : ""}
+                    {isAdmin ? (
+                        <NavbarToggler onClick={toggle} />
+                    ) :             
+                        <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Cadastrar-se</SNavLink>
+                    }
                 </Container>
             </SNavbar>
         </header>

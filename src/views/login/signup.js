@@ -21,9 +21,9 @@ const SignUp = () => {
     const registered = useSelector(state => state.auth.registered)
 
     const [form, setForm] = useState({
-        nome: 'Liniker',
-        email: 'liniker@professor.com',
-        senha: '123123'
+        nome: '',
+        email: '',
+        senha: ''
     })
 
     const handleChange = (props) => {
@@ -61,7 +61,6 @@ const SignUp = () => {
             setForm({})
         }
     }, [registered])
-
 
     return (
         <Sign>

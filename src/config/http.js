@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const urlApi = "http://localhost:3001/v1";
+const urlApi = "http://localhost:3001/v2";
 
 const http = axios.create({
     baseURL: urlApi

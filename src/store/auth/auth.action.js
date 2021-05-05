@@ -13,18 +13,19 @@ export const TYPES = {
 }
 
 export const signInAction = (data) => {
+    
     return async (dispatch) => {
         dispatch({ type: TYPES.SIGN_LOADING, status: true })
 
         try {
-            const result = await authService(data) //liguei para o ezer
+            const result = await authService(data)
             if (result.data) {
                 saveAuth(result.data)
                 http.defaults.headers['token'] = result.data.token;
             }
-            // mandando informação para o reducer
+
             dispatch({
-                type: TYPES.SIGN_IN, data: result.data  // mandei para a tamara
+                type: TYPES.SIGN_IN, data: result.data
             })
             history.push('/')
         } catch (error) {
@@ -38,13 +39,13 @@ export const signUpAction = (data) => {
     return async (dispatch) => {
         dispatch({ type: TYPES.SIGN_LOADING, status: true })
         try {
-            const result = await registerUserService(data) //liguei para o ezer
+            const result = await registerUserService(data) 
             if (result.data) {
                 saveAuth(result.data)
                 http.defaults.headers['token'] = result.data.token;
             }
             dispatch({
-                type: TYPES.SIGN_UP, data: result.data  // mandei para a tamara
+                type: TYPES.SIGN_UP, data: result.data
             })
 
             setTimeout(() => {

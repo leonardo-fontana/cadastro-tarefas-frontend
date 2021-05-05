@@ -7,22 +7,21 @@ import {
 } from 'reactstrap';
 import { Sign } from '../../assets/styled';
 import { Link } from 'react-router-dom';
-//import { signInAction } from '../../store/auth/auth.action'
-import { useSelector } from 'react-redux';
+import { signInAction } from '../../store/auth/auth.action'
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 const SignIn = () => {
 
     const [hasError, setHasError] = useState(false);
 
-
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const error = useSelector(state => state.auth.error)
     const loading = useSelector(state => state.auth.loading)
 
     const [form, setForm] = useState({
-        usuario: "liniquer.silva@prof.infnet.edu.br",
-        senha: "121212"
+        usuario: "",
+        senha: ""
     })
     const handleChange = (props) => {
         const { value, name } = props.target;
@@ -36,7 +35,7 @@ const SignIn = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        //dispatch(signInAction(form))
+        dispatch(signInAction(form))
     }
 
     const isNotValid = () => form.usuario.length === 0 || form.senha.length === 0
