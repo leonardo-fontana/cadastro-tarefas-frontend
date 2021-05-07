@@ -104,20 +104,4 @@ const Detalhes = (props) => {
     )
 }
 
-
 export default Detalhes;
-
-
-/*const Navbar = styled.div`
-    background-color:none !important;
-    margin: 10px 0 20px;
-    padding: 10px 0;
-    border-bottom: thin dotted #4446;
-    display:flex;
-    
-    .info {
-        flex:1;
-    }
-
-
-`*/

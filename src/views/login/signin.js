@@ -6,13 +6,14 @@ import {
     Button, CardFooter, Label, Alert, Spinner
 } from 'reactstrap';
 import { Sign } from '../../assets/styled';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { signInAction } from '../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-const SignIn = () => {
 
+const SignIn = () => {
+    const history = useHistory();
     const [hasError, setHasError] = useState(false);
 
     const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const SignIn = () => {
     const submitForm = (e) => {
         e.preventDefault();
         dispatch(signInAction(form))
+        history.push('/')
     }
 
     const isNotValid = () => form.usuario.length === 0 || form.senha.length === 0
@@ -50,8 +52,6 @@ const SignIn = () => {
                 <Alert color="danger" isOpen={hasError} toggle={closeError}>
                     <div><strong>OPS !!! </strong> Aconteceu um erro.</div>
                     <small>Verifique usuário e senha</small>
-
-
                 </Alert>
                 <Card>
                     <CardHeader tag="h4" className="text-center">Login</CardHeader>

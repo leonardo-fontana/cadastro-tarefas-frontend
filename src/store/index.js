@@ -5,12 +5,12 @@ import thunk from 'redux-thunk'
 
 // importação dos reducers
 import SignReducer from "./auth/auth.reducer"
-//import CursoReducer from "./curso/curso.reducer"
+import TarefaReducer from "./tarefa/tarefa.reducer"
 //import AlunoReducer from "./aluno/aluno.reducer"
 
 const reducers = combineReducers({
     auth: SignReducer,
-    //curso: CursoReducer,
+    tarefa: TarefaReducer,
     //aluno: AlunoReducer,
 })
 

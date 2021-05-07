@@ -27,7 +27,7 @@ export const signInAction = (data) => {
             dispatch({
                 type: TYPES.SIGN_IN, data: result.data
             })
-            history.push('/')
+            //history.go('/')
         } catch (error) {
             dispatch({ type: TYPES.SIGN_ERROR, data: error })
         }

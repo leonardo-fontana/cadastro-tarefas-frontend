@@ -1,34 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { getServiceAllTarefas } from '../../services/tarefa.service.js';
+import React, { useEffect } from 'react';
 import CardItem from "../../components/tarefas/card_item";
 import Loading from '../../components/loading'
 import styled from 'styled-components';
 import { Col, Row, Navbar } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTarefas } from '../../store/tarefa/tarefa.action'
 
 const Tarefas = () => {
 
-    const [tarefas, setTarefas] = useState([]);
-    const [loading, setLoading] = useState(false)
-    //const [hasError, setError] = useState(false)
-    
-    const getTarefas = useCallback(() => {
-        setLoading(true)
-        getServiceAllTarefas()
-            .then(res => {
-                setTarefas(res.data)
-                setLoading(false)
-            })
-            .catch(err => {
-                //hasError(true)
-                //setError(true)
-                console.log('Algo deu errado', err)
-                setLoading(false)
-            })
-    }, [])
+    const dispatch = useDispatch()
+    const tarefas = useSelector(state => state.tarefa.all)
+    const loading = useSelector(state => state.tarefa.loading)
 
     useEffect(() => {
-        getTarefas();
-    }, [getTarefas])
+        dispatch(getAllTarefas());
+    }, [dispatch])
 
     const Menu = () => (
         <Navbar expand="md mb-4">

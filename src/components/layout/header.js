@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink as RRDNavLink } from 'react-router-dom'; // funcionalidade
+import { NavLink as RRDNavLink, useHistory } from 'react-router-dom'; // funcionalidade
 import {
     Collapse,
     Nav, Navbar, NavItem, NavLink, NavbarToggler, NavbarBrand,
@@ -12,13 +12,13 @@ import { AiFillRead } from 'react-icons/ai'
 import { logoutAction } from '../../store/auth/auth.action';
 import { isAuthenticated } from '../../config/auth';
 import { useSelector, useDispatch } from 'react-redux';
-import history from '../../config/history';
 
 const Header = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
-
+   
     const toggleTooltip = () => setTooltipOpen(!tooltipOpen);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -28,7 +28,6 @@ const Header = (props) => {
     const logout = () => {
         dispatch(logoutAction())
     }
-
 
     return (
         <header>
@@ -74,7 +73,7 @@ const Header = (props) => {
                                     </DropdownToggle>
                                     <DropdownMenu>
 
-                                        <DropdownItem onClick={() => history.push('/perfil')}>Perfil</DropdownItem>
+                                        <DropdownItem onClick={() => history.push('/perfil/1')}>Perfil</DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem onClick={logout}>Sair</DropdownItem>
                                     </DropdownMenu>
@@ -85,7 +84,7 @@ const Header = (props) => {
                     {isAdmin ? (
                         <NavbarToggler onClick={toggle} />
                     ) :             
-                        <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Cadastrar-se</SNavLink>
+                        <SNavLink exact tag={RRDNavLink} activeClassName="active" to="/signin" >Login</SNavLink>
                     }
                 </Container>
             </SNavbar>
