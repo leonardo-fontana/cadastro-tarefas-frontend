@@ -6,12 +6,10 @@ import thunk from 'redux-thunk'
 // importação dos reducers
 import SignReducer from "./auth/auth.reducer"
 import TarefaReducer from "./tarefa/tarefa.reducer"
-//import AlunoReducer from "./aluno/aluno.reducer"
 
 const reducers = combineReducers({
     auth: SignReducer,
     tarefa: TarefaReducer,
-    //aluno: AlunoReducer,
 })
 
 // middlewares de redux

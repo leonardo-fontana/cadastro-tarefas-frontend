@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { createServiceTarefa } from '../../services/tarefa.service.js';
 import ReactSwal from "../../plugins/swal";
 import { Button,Form,FormGroup,Label,Input } from 'reactstrap';
 import { useHistory } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { createTarefa } from '../../store/tarefa/tarefa.action'
 
 const CadastroTarefa = (props, id, update, isForm) => {
 
+    const dispatch = useDispatch()
     const [form, setForm] = useState({})
     const history = useHistory();
+
+    const tarefas = useSelector(state => state.tarefa.all)
 
     const handleChange = (e) => {
         setForm({
@@ -20,14 +24,11 @@ const CadastroTarefa = (props, id, update, isForm) => {
 
         const nform = {
             ...form,
-            titulo: form.titulo_tarefa.toUpperCase(),
-            descricao: form.descricao_tarefa,
-            data_inicio: form.data_inicio,
-            data_fim: form.data_fim,
-            usuario_id: form.usuario_id
+            titulo: form.titulo.toUpperCase(),
+            
         }
 
-        createServiceTarefa(nform)
+        dispatch(createTarefa(nform))
             .then(() => {
                 ReactSwal.fire({
                     icon: 'success',
@@ -53,11 +54,11 @@ const CadastroTarefa = (props, id, update, isForm) => {
             <Form>
                 <FormGroup>
                     <Label for="titulo">Título</Label>
-                    <Input type="text" name="titulo_tarefa" id="titulo_tarefa" placeholder="Titulo da tarefa" onChange={handleChange} />
+                    <Input type="text" name="titulo" id="titulo" placeholder="Titulo da tarefa" onChange={handleChange} />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="descricao_tarefa">Descrição</Label>
-                    <Input type="textarea" name="descricao_tarefa" id="descricao_tarefa" onChange={handleChange} />
+                    <Label for="descricao">Descrição</Label>
+                    <Input type="textarea" name="descricao" id="descricao" onChange={handleChange} />
                 </FormGroup>
                  <FormGroup>
                     <Label for="data_inicio">Data de início</Label>

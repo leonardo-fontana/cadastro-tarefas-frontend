@@ -23,7 +23,7 @@ export const signInAction = (data) => {
                 saveAuth(result.data)
                 http.defaults.headers['token'] = result.data.token;
             }
-
+                
             dispatch({
                 type: TYPES.SIGN_IN, data: result.data
             })

@@ -4,6 +4,7 @@ import { getToken, getUser } from "../../config/auth";
 
 const INITIAL_STATE = {
     isAdmin: getUser().tipo === '1' || false,
+    isCommonUser: getUser().tipo === '2' || false,
     loading: false,
     token: getToken() || "",
     usuario: getUser() || {},
@@ -21,6 +22,7 @@ const reducer = (state = INITIAL_STATE, action) => {
             state.token = action.data.token
             state.usuario = action.data.usuario
             state.isAdmin = action.data.usuario.tipo === '1'
+            state.isCommonUser = action.data.usuario.tipo === '2'
             state.loading = false
             return state
         case TYPES.SIGN_UP:
@@ -28,6 +30,7 @@ const reducer = (state = INITIAL_STATE, action) => {
             state.token = action.data.token
             state.usuario = action.data.usuario
             state.isAdmin = action.data.usuario.tipo === '1'
+            state.isCommonUser = action.data.usuario.tipo === '2'
             state.loading = false
             return state
         case TYPES.SIGN_ERROR:

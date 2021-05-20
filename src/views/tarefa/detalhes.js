@@ -6,6 +6,8 @@ import Loading from '../../components/loading'
 import { BiTrash } from 'react-icons/bi'
 import ReactSwal from '../../plugins/swal';
 import { useHistory } from 'react-router';
+import { deleteTarefa } from '../../store/tarefa/tarefa.action'
+import { useSelector, useDispatch } from 'react-redux';
 
 const Detalhes = (props) => {
     const { id } = useParams();
@@ -13,6 +15,7 @@ const Detalhes = (props) => {
     const [loading, setLoading] = useState(false);
     const [detalhe, setDetalhe] = useState({});
     const [update, setUpdate] = useState(false)
+    const dispatch = useDispatch()
 
     const [modal, setModal] = useState({
         isOpen: false,
@@ -40,9 +43,9 @@ const Detalhes = (props) => {
         })
     }
 
-    const deleteTarefa = () =>  {
+    const deleteTarefaMethod = () =>  {
         if (modal.data.id) {
-            deleteServiceTarefa(modal.data.id)
+            dispatch(deleteTarefa(modal.data.id))
                 .then(() => {
                     ReactSwal.fire({
                         icon: 'success',
@@ -89,7 +92,7 @@ const Detalhes = (props) => {
                     </ModalBody>
                 <ModalFooter>
 
-                <Button color="primary" onClick={deleteTarefa}>SIM</Button>
+                <Button color="primary" onClick={deleteTarefaMethod}>SIM</Button>
                     <Button color="secondary" onClick={toggleModal}>NÃO</Button>
                 </ModalFooter>
             </Modal>

@@ -2,9 +2,7 @@ import {
     createServiceTarefa,
     deleteServiceTarefa,
     getServiceAllTarefas,
-    getServiceDetalhe,
-    //removeServiceTarefa,
-    //updateServiceCurso
+    updateServiceTarefa
 } from "../../services/tarefa.service"
 
 export const TYPES = {
@@ -31,83 +29,46 @@ export const getAllTarefas = () => {
     }
 }
 
-/*export const createCourse = (curso) => {
+export const createTarefa = (tarefa) => {
     return async (dispatch) => {
-        dispatch({ type: TYPES.COURSE_LOADING, status: true })
+        dispatch({ type: TYPES.TAREFA_LOADING, status: true })
         try {
-            await createServiceCurso(curso)
-            dispatch(getcourseAll())
+            createServiceTarefa(tarefa)
+            dispatch(getAllTarefas())
 
         } catch (error) {
-            dispatch({ type: TYPES.COURSE_LOADING, status: false })
-            console.log('aconteceu um ERRO": Erro ao criar usuario')
+            dispatch({ type: TYPES.TAREFA_LOADING, status: false })
+            console.log('aconteceu um ERRO": Erro ao criar tarefa')
         }
 
     }
 }
-export const updateCourse = ({ id, coordinator, name, start_date }) => {
+export const updateTarefa = ({ id, titulo, descricao, data_inicio, data_fim }) => {
     return async (dispatch) => {
-        dispatch({ type: TYPES.COURSE_LOADING, status: true })
+        dispatch({ type: TYPES.TAREFA_LOADING, status: true })
         try {
-            const data = { coordinator, name, start_date }
+            const data = { titulo, descricao, data_inicio, data_fim }
 
-            await updateServiceCurso(id, data)
-            dispatch(getcourseAll())
+            await updateServiceTarefa(id, data)
+            dispatch(getAllTarefas())
 
         } catch (error) {
-            dispatch({ type: TYPES.COURSE_LOADING, status: false })
-            console.log('aconteceu um ERRO": Erro ao criar usuario')
+            dispatch({ type: TYPES.TAREFA_LOADING, status: false })
+            console.log('aconteceu um ERRO": Erro ao criar tarefa')
         }
 
     }
 }
-export const removeCourse = (id_curso) => {
+export const deleteTarefa = (id_tarefa) => {
     return async (dispatch) => {
-        dispatch({ type: TYPES.COURSE_LOADING, status: true })
+        dispatch({ type: TYPES.TAREFA_LOADING, status: true })
         try {
-            // debugger
-            await removeServiceCurso(id_curso)
-            dispatch(getcourseAll())
+            await deleteServiceTarefa(id_tarefa)
+            dispatch(getAllTarefas())
 
         } catch (error) {
-            dispatch({ type: TYPES.COURSE_LOADING, status: false })
-            console.log('aconteceu um ERRO": Erro ao Excluir curso::', error)
+            dispatch({ type: TYPES.TAREFA_LOADING, status: false })
+            console.log('aconteceu um ERRO": Erro ao Excluir tarefa::', error)
         }
-
     }
 }
-export const getDetails = (id_curso) => {
-    return async (dispatch) => {
-        try {
-
-            const res = await getServiceDetalhe(id_curso);
-            res.data.registered = res.data.inscricoes.length > 0;
-            dispatch({
-                type: TYPES.COURSE_DETAILS,
-                data: res.data
-            })
-        } catch (error) {
-            dispatch({ type: TYPES.COURSE_LOADING, status: false })
-            console.log('aconteceu um ERRO": Erro ao detalhar usuario')
-        }
-
-    }
-}
-export const deleteSubscription = (id_aluno) => {
-    return async (dispatch, getState) => {
-        const { curso } = getState()
-        dispatch({ type: TYPES.COURSE_LOADING, status: true })
-
-        try {
-            const res = await deleteServiceSubscription(curso.details.id, id_aluno)
-
-            if (res.status === 200) {
-                dispatch(getDetails(curso.details.id))
-            }
-        } catch (error) {
-            dispatch({ type: TYPES.COURSE_LOADING, status: false })
-            console.log('aconteceu um ERRO": Erro ao criar usuario')
-
-        }
-    }
-}*/
