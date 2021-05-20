@@ -2,7 +2,9 @@ import {
     createServiceTarefa,
     deleteServiceTarefa,
     getServiceAllTarefas,
-    updateServiceTarefa
+    getServiceAllTarefasFromUsuario,
+    updateServiceTarefa,
+    getServiceGetTarefa
 } from "../../services/tarefa.service"
 
 export const TYPES = {
@@ -29,6 +31,40 @@ export const getAllTarefas = () => {
     }
 }
 
+export const getAllTarefasFromUsuario = () => {
+    return async (dispatch) => {
+
+        dispatch({ type: TYPES.TAREFA_LOADING, status: true })
+
+        try {
+            const all = await getServiceAllTarefasFromUsuario()
+            dispatch({
+                type: TYPES.TAREFA_ALL,
+                data: all.data
+            })
+        } catch (error) {
+            dispatch({ type: TYPES.TAREFA_LOADING, status: false })
+            console.log('aconteceu um ERRO": disparar um e-mail para Admin')
+        }
+    }
+}
+
+
+export const getTarefa = (id) => {
+    return async (dispatch) => {
+        try {
+            const res = await getServiceGetTarefa(id);
+            dispatch({
+                type: TYPES.TAREFA_DETAILS,
+                data: res.data
+            })
+        } catch (error) {
+            dispatch({ type: TYPES.COURSE_LOADING, status: false })
+            console.log('aconteceu um ERRO": Erro ao detalhar usuario')
+        }
+    }
+}
+
 export const createTarefa = (tarefa) => {
     return async (dispatch) => {
         dispatch({ type: TYPES.TAREFA_LOADING, status: true })
@@ -43,6 +79,7 @@ export const createTarefa = (tarefa) => {
 
     }
 }
+
 export const updateTarefa = ({ id, titulo, descricao, data_inicio, data_fim }) => {
     return async (dispatch) => {
         dispatch({ type: TYPES.TAREFA_LOADING, status: true })

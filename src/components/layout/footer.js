@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 const Footer = () => (
     <SFooter>
-        <a href="https://gitlab.com/leonardo.fontana/projeto3-tarefas-fronend"><i class="fa fa-gitlab fa-2x" aria-hidden="true"></i></a>
+        <a href="https://gitlab.com/leonardo.fontana/projeto3-tarefas-fronend"><i class="fa fa-gitlab fa-2x" aria-hidden="true" ></i> </a>
         <p>Todos os direitos reservados - 
            Leonardo Damásio Fontana | Telefone: (99) 9999-9999
         </p>
-     
     </SFooter>
 );
 

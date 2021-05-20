@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import ReactSwal from "../../plugins/swal";
 import { Button,Form,FormGroup,Label,Input } from 'reactstrap';
 import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createTarefa } from '../../store/tarefa/tarefa.action'
 
-const CadastroTarefa = (props, id, update, isForm) => {
+const CadastroTarefa = (update, isForm) => {
 
     const dispatch = useDispatch()
     const [form, setForm] = useState({})
     const history = useHistory();
-
-    const tarefas = useSelector(state => state.tarefa.all)
 
     const handleChange = (e) => {
         setForm({
@@ -21,18 +19,16 @@ const CadastroTarefa = (props, id, update, isForm) => {
     }
 
     const submitForm = () => {
-
         const nform = {
             ...form,
-            titulo: form.titulo.toUpperCase(),
-            
+            titulo: form.titulo.toUpperCase(),           
         }
 
         dispatch(createTarefa(nform))
             .then(() => {
                 ReactSwal.fire({
                     icon: 'success',
-                    title: `Tarefa ${form.titulo_tarefa} cadastrado com sucesso !`,
+                    title: `Tarefa ${form.titulo} cadastrado com sucesso !`,
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -43,8 +39,7 @@ const CadastroTarefa = (props, id, update, isForm) => {
                 
                 setForm({});
                 update(true)
-                isForm(false)
-                
+                isForm(false)              
             })
             .catch(erro => console.log('deu ruim...'))          
     }
@@ -67,11 +62,7 @@ const CadastroTarefa = (props, id, update, isForm) => {
                 <FormGroup>
                     <Label for="data_fim">Data de término</Label>
                     <Input type="date" name="data_fim" id="data_fim" onChange={handleChange}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="usuario_id">Id usuario</Label>
-                    <Input type="number" name="usuario_id" id="usuario_id" onChange={handleChange}/>
-                </FormGroup>             
+                </FormGroup>           
             </Form>
             <Button onClick={submitForm}>Cadastrar</Button>       
         </div>
@@ -79,4 +70,3 @@ const CadastroTarefa = (props, id, update, isForm) => {
 }
 
 export default CadastroTarefa;
-

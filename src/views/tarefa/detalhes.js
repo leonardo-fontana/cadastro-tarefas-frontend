@@ -1,40 +1,29 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { deleteServiceTarefa, getServiceDetalhe } from '../../services/tarefa.service'
 import { Button, Jumbotron, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Loading from '../../components/loading'
 import { BiTrash } from 'react-icons/bi'
 import ReactSwal from '../../plugins/swal';
 import { useHistory } from 'react-router';
-import { deleteTarefa } from '../../store/tarefa/tarefa.action'
+import { getTarefa, deleteTarefa } from '../../store/tarefa/tarefa.action'
 import { useSelector, useDispatch } from 'react-redux';
 
-const Detalhes = (props) => {
+const Detalhes = () => {
     const { id } = useParams();
     const history = useHistory();
-    const [loading, setLoading] = useState(false);
-    const [detalhe, setDetalhe] = useState({});
-    const [update, setUpdate] = useState(false)
+
     const dispatch = useDispatch()
+    const tarefa = useSelector(state => state.tarefa.details)
+    const loading = useSelector(state => state.tarefa.loading)
+
+    useEffect(() => {
+        dispatch(getTarefa(id));
+    }, [dispatch, id])
 
     const [modal, setModal] = useState({
         isOpen: false,
         data: null
     })
-
-    const getDetalhes = useCallback(async () => {
-        try {
-            setLoading(true)
-            const res = await getServiceDetalhe(id);
-            setDetalhe(res.data)
-            setLoading(false)
-
-        } catch (error) {
-            console.log('####', error)
-            history.push('/error/404')
-        }
-
-    }, [id, history]);
 
     const toggleModal = (data = null) => {
         setModal({
@@ -56,21 +45,15 @@ const Detalhes = (props) => {
                     setTimeout(() => {
                         history.push('/tarefa')
                     }, 2000) 
-                    update(true)
                 })
                 .catch(erro => console.log('Algo deu errado...'))
         }      
     }
 
-    useEffect(() => {
-        getDetalhes()
-        setUpdate(false)
-    }, [getDetalhes, update])
-
-    const montarTela = (tarefa) => (
+    const montarTela = () => (
         <div>
             <Jumbotron>
-                <div className="display-4">{tarefa.titulo}</div>
+                <h2>{tarefa.titulo}</h2>
                 <p className="lead">
                     <strong>{tarefa.descricao}</strong>
                 </p>
@@ -103,7 +86,7 @@ const Detalhes = (props) => {
     return (
         loading
             ? <Loading />
-            : montarTela(detalhe)
+            : montarTela()
     )
 }
 

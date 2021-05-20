@@ -4,7 +4,7 @@ import Loading from '../../components/loading'
 import styled from 'styled-components';
 import { Col, Row, Navbar } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTarefas } from '../../store/tarefa/tarefa.action'
+import { getAllTarefasFromUsuario } from '../../store/tarefa/tarefa.action'
 
 const Tarefas = () => {
 
@@ -13,14 +13,16 @@ const Tarefas = () => {
     const loading = useSelector(state => state.tarefa.loading)
 
     useEffect(() => {
-        dispatch(getAllTarefas());
+        dispatch(getAllTarefasFromUsuario());
     }, [dispatch])
 
     const Menu = () => (
         <Navbar expand="md mb-4">
             <div className="info d-none d-md-block d-lg-block">
             </div>
-            <a href="/tarefa/1" class="btn btn-primary">Cadastrar nova tarefa</a>
+       
+            <p></p>
+            <a href="/tarefa/cadastrar" class="btn btn-primary">Cadastrar nova tarefa</a>
         </Navbar>
     )
 
@@ -31,9 +33,11 @@ const Tarefas = () => {
     ))
 
     return (
-        <div>    
+        <div>   
+             <h2>Lista de tarefas pessoais</h2> 
             {Menu()}       
             <BoxTarefas>        
+                
                 {loading ? <Loading /> : MapearTarefas(tarefas)}
             </BoxTarefas>
         </div>

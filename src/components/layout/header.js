@@ -73,7 +73,7 @@ const Header = (props) => {
                                     </DropdownToggle>
                                     <DropdownMenu>
 
-                                        <DropdownItem onClick={() => history.push('/perfil/1')}>Perfil</DropdownItem>
+                                        <DropdownItem onClick={() => history.push('/perfil')}>Perfil</DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem onClick={logout}>Sair</DropdownItem>
                                     </DropdownMenu>

@@ -63,12 +63,14 @@ const Routers = () => {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <AdminRoute exact path='/tarefa' admin={isAdmin} component={Tarefas} />
-                    <AdminRoute exact path='/tarefa/:id' admin={isAdmin} component={CadastroTarefa} />
+                    <AdminRoute exact path='/tarefa/usuario' admin={isAdmin} component={Tarefas} />
+                    <AdminRoute exact path='/tarefa/cadastrar' admin={isAdmin} component={CadastroTarefa} />
+                    <CommonUserRoute exact path='/tarefa/cadastrar' admin={isAdmin} component={CadastroTarefa} />
                     <CommonUserRoute exact path='/tarefa/:id/teste' admin={isCommonUser} component={CadastroTarefa} />
                     <Route exact path='/signin' component={SignIn} />
                     <Route exact path='/signup' component={SignUp} />
 
-                    <Route exact path='/perfil/:id' component={Perfil} />
+                    <Route exact path='/perfil' component={Perfil} />
                     <Route exact path='/sobre' component={Sobre} />
                     <Route exact path='/detalhes/:id' component={Detalhes} />
                     

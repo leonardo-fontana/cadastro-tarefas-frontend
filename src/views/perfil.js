@@ -5,7 +5,7 @@ import { Jumbotron} from 'reactstrap';
 import Loading from '../components/loading'
 import { useHistory } from 'react-router';
 
-const Perfil = (props) => {
+const Perfil = () => {
     const { id } = useParams();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
@@ -37,6 +37,9 @@ const Perfil = (props) => {
                 <div className="display-4">{usuario.nome}</div>
                 <p className="lead">
                     Email: <strong>{usuario.email}</strong>
+                </p>  
+                <p className="lead">
+                    Tipo: <strong>{usuario.tipo}</strong>
                 </p>  
             </Jumbotron>
         </div>
